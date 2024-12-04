@@ -1,6 +1,7 @@
 # Haskell Student Management Program
 
-This project is a Haskell application designed to manage student records efficiently. It provides functionality for processing student data, such as calculating averages and generating reports, with a focus on functional programming principles.
+This project is the result of a college assignment, where the objective was to explore the functional programming paradigm using a purely functional language.
+It consists of a Haskell application designed to manage student records efficiently. It provides functionality for processing student data, such as calculating averages and generating reports, with a focus on functional programming principles.
 
 ---
 
