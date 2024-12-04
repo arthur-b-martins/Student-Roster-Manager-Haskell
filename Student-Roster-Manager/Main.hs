@@ -1,13 +1,12 @@
 {-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  Integrantes: Matheus Henrique de Andrade Pires (12411BCC061)
-               Arthur Borges Martins (12411BCC063) 
+  Authors : Arthur Borges Martins, Matheus Henrique de Andrade Pires 
                
-Instruções: Para compilar o programa basta digitar no terminal do Ubuntu ghc Main 
-Para executar o programa, digite no terminal do Ubuntu ./Main             
+Instructions: To compile the program, type the following in the Ubuntu terminal: ghc Main
+To execute the program, type the following in the Ubuntu terminal: ./Main             
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-}
 module Main (main) where
 
--- BIBLIOTECAS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- LIBS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 import System.Directory (doesFileExist)
 import System.IO (stdout, hSetBuffering, BufferMode(NoBuffering), writeFile)
@@ -17,11 +16,11 @@ import Data.List (maximum, minimum, sort,intercalate)
 import Control.DeepSeq (deepseq)
 import Text.Printf (printf)
 
--- MAIN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- MAIN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 main :: IO ()
 main = menuLoop "" ""
 
--- MENU PRINCIPAL ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- MAIN MENU ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Função para imprimir o menu e pegar a opção do usuário
 menuLoop :: String -> String -> IO ()
 menuLoop conteudo caminho = do 
@@ -55,7 +54,7 @@ escolhaMenu e conteudo caminho = case e of
   "7" -> salvarSair conteudo caminho 
   _   -> putStrLn "Opção inválida" >> menuLoop "" ""
 
--- 1 - LER TURMA DE ESTUDANTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 1 - LOAD CLASS FILE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Função para chamar o menu de leitura de turma (Figura 2)
 lerTurma :: String -> String -> IO ()
 lerTurma conteudo caminho = do
@@ -124,7 +123,7 @@ sobreescrever novaTurma = do
     'n' -> lerTurma "" ""
     _   -> putStrLn "Opcao Invalida!" >> sobreescrever novaTurma
 
--- 2 - IMPRIMIR TURMA DE ESTUDANTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 2 - PRINT STUDENT CLASS LOADED ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Imprimir turma caso haja uma carregada
 imprimirTurma :: String -> String -> IO ()
 imprimirTurma conteudo caminho = do 
@@ -171,7 +170,7 @@ cabecalho = do
   putStrLn "______________________________________________________________________________________________________________"
   putStrLn "Nome                                               Matrícula   N1   N2   N3   T1   T2   Faltas  Final  Situacao\n\n"
 
--- 3 - IMPRIMIR ESTATÍSTICAS DA TURMA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 3 - PRINT STATISTICS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Função para calcular/chamar funções auxíliares para extrair informações dos dados
 calcularEstatisticas :: String -> String -> IO ()
 calcularEstatisticas conteudo caminho = do
@@ -293,7 +292,7 @@ lerNotas conteudo op = auxLerNotas op (lines conteudo)
         "t2" -> read tr2 : auxLerNotas op xs
         "nf" -> read notF : auxLerNotas op xs
 
--- 4 - CADASTRAR NOVO ESTUDANTE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 4 - REGISTER NEW STUDENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Verifica se há turma carregada e chama aux
 cadastrarNovo :: String -> String -> IO ()
 cadastrarNovo conteudo caminho = do 
@@ -380,7 +379,7 @@ situacaoString s
   | s == 'F' = "Reprovado por faltas"
   | s == 'R' = "Recuperação"
 
--- 5 - EDITAR INFORMAÇÕES DE UM ESTUDANTE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 5 - EDIT A STUDENT’S INFORMATION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Verifica se há turma e alunos na turma, caso haja, chama aux
 editarInfo :: String -> String -> IO ()
 editarInfo conteudo caminho = do 
@@ -641,7 +640,7 @@ situacaoF faltas nf
   | nf > 59 = 'A'
   | otherwise = 'R'
 
--- 6 - RELER TURMA DE ESTUDANTES DO ARQUIVO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 6 - REREAD THE CLASS OF STUDENTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Função para reler um arquivo
 relerArquivo :: String -> String -> IO ()
 relerArquivo conteudo caminho = do
@@ -656,8 +655,7 @@ relerArquivo conteudo caminho = do
       putStrLn "Erro! Nenhum arquivo foi carregado!"
       menuLoop conteudo caminho
 
--- 7 - SALVAR E SAIR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+-- 7 - SAVE AND EXIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 salvarSair :: String -> String -> IO ()
 salvarSair conteudo caminho = do
   if null caminho
@@ -669,7 +667,7 @@ salvarSair conteudo caminho = do
       putStrLn "\nSalvando arquivo...\n" 
   putStr "\nSaindo do programa...\n\n"
 
--- FUNÇÕES AUXILIARES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- AUXILIARY FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Função para calcular o percentual correspondente a n em relação ao tamanho da lista
 calculatePorcentage :: Int -> [Float] -> Float
 calculatePorcentage count list = if length list == 0 then 0 else (100 * fromIntegral count) / fromIntegral (length list)
@@ -731,7 +729,7 @@ menuGeral msg = do
   padding = (110 - (length msg)) `div` 2
   msgCentralizada = replicate padding ' ' ++ msg 
 
--- TIPO 'ALUNO'  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- DATA TYPE 'ALUNO' (STUDENT) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 data Aluno = Aluno {
     nome :: String,          -- Nome do aluno (até 50 caracteres)
     matricula :: String,     -- Matrícula (11 caracteres)
