@@ -35,6 +35,7 @@ ghc Main
 ---
 
 ## ✨ Features
+- Manages student class files.
 - Calculate student grades based on given data.
 - Generate reports and statistics.
 - Functional programming implementation.
